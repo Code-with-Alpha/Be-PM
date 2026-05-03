@@ -5,97 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Be PM: Road to Prime Minister 🇮🇳</title>
   <meta name="description" content="Learn Indian election civics through a fun adventure game. Go from Common Citizen to Prime Minister with Chunav Guru as your guide!" />
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;" />
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+
+    // Helper: track custom game events
+    function trackEvent(eventName, params) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, params || {});
+      }
+    }
+  </script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Animated background -->
-  <div class="bg-gradient"></div>
-  <canvas id="particleCanvas"></canvas>
+  <!-- Skip Navigation (Accessibility) -->
+  <a href="#messages" class="skip-nav">Skip to main content</a>
+
+  <!-- Animated Background -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
   <!-- App Shell -->
   <div class="app" id="app">
 
     <!-- LEFT SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Player progress sidebar">
       <div class="sidebar-header">
-        <div class="flag-strip">
-          <span class="flag-saffron"></span>
-          <span class="flag-white"><div class="mini-chakra"></div></span>
-          <span class="flag-green"></span>
+        <div class="flag-strip" aria-label="Indian tricolor flag" role="img">
+          <span class="flag-saffron" aria-hidden="true"></span>
+          <span class="flag-white" aria-hidden="true"><div class="mini-chakra" aria-hidden="true"></div></span>
+          <span class="flag-green" aria-hidden="true"></span>
         </div>
-        <div class="game-logo">🏛️ BE PM</div>
+        <div class="game-logo" role="heading" aria-level="1">🏛️ BE PM</div>
       </div>
 
-      <div class="player-card">
+      <div class="player-card" aria-label="Player profile">
         <div class="avatar-wrap">
-          <div class="avatar-glow"></div>
-          <div class="avatar" id="avatarIcon">🧑</div>
+          <div class="avatar-glow" aria-hidden="true"></div>
+          <div class="avatar" id="avatarIcon" role="img" aria-label="Player avatar">🧑</div>
         </div>
-        <div class="player-name" id="sidebarName">Citizen</div>
-        <div class="rank-badge" id="sidebarRank">
-          <span id="rankIcon">🌱</span>
+        <div class="player-name" id="sidebarName" aria-live="polite">Citizen</div>
+        <div class="rank-badge" id="rankBadge" aria-live="polite" aria-label="Current rank">
+          <span id="rankIcon" aria-hidden="true">🌱</span>
           <span id="rankLabel">Common Citizen</span>
         </div>
       </div>
 
-      <div class="xp-block">
+      <div class="xp-block" aria-label="XP progress section">
         <div class="xp-header">
           <span>XP Progress</span>
-          <span id="xpCount">0 / 1000</span>
+          <span id="xpCount" aria-live="polite" aria-label="XP points">0 / 1000</span>
         </div>
-        <div class="xp-track">
+        <div class="xp-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1000" aria-label="XP progress bar" id="xpTrack">
           <div class="xp-fill" id="xpFill"></div>
         </div>
         <div class="xp-sublabel" id="xpSublabel">Keep going!</div>
       </div>
 
-      <div class="level-journey">
+      <div class="level-journey" aria-label="Level journey">
         <div class="journey-title">Your Journey</div>
-        <div class="level-dots" id="levelDots"></div>
+        <div class="level-dots" id="levelDots" role="list" aria-label="Level progress indicators"></div>
       </div>
 
-      <div class="quick-cmds">
+      <nav class="quick-cmds" aria-label="Quick commands">
         <div class="cmds-title">Quick Commands</div>
-        <button class="qbtn" onclick="game.cmd('hint')">💡 Hint</button>
-        <button class="qbtn" onclick="game.cmd('fun fact')">🎯 Fun Fact</button>
-        <button class="qbtn" onclick="game.cmd('explain more')">📚 Explain More</button>
-        <button class="qbtn" onclick="game.cmd('my rank')">🏅 My Rank</button>
-        <button class="qbtn danger" onclick="game.cmd('restart')">🔄 Restart</button>
-      </div>
+        <button class="qbtn" onclick="game.cmd('hint')" aria-label="Get a hint for the current question">💡 Hint</button>
+        <button class="qbtn" onclick="game.cmd('fun fact')" aria-label="Hear a fun fact about Indian elections">🎯 Fun Fact</button>
+        <button class="qbtn" onclick="game.cmd('explain more')" aria-label="Get a deeper explanation of the current topic">📚 Explain More</button>
+        <button class="qbtn" onclick="game.cmd('my rank')" aria-label="Check your current rank and XP status">🏅 My Rank</button>
+        <button class="qbtn danger" onclick="game.cmd('restart')" aria-label="Restart the entire game from the beginning">🔄 Restart</button>
+      </nav>
     </aside>
 
     <!-- MAIN CHAT AREA -->
-    <main class="chat-wrap">
+    <main class="chat-wrap" aria-label="Game chat interface">
 
       <!-- Header -->
       <header class="chat-header">
-        <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+        <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Toggle sidebar navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
         <div class="header-guru">
-          <div class="guru-orb">CG</div>
+          <div class="guru-orb" aria-hidden="true">CG</div>
           <div>
             <div class="header-title">🇮🇳 BE PM: Road to Prime Minister</div>
-            <div class="header-sub" id="headerSub">Chunav Guru is ready to guide you</div>
+            <div class="header-sub" id="headerSub" aria-live="polite">Chunav Guru is ready to guide you</div>
           </div>
         </div>
-        <div class="header-xp-mini">
+        <div class="header-xp-mini" aria-hidden="true">
           <span id="headerXP">0 XP</span>
         </div>
       </header>
 
-      <!-- Messages -->
-      <div class="messages" id="messages"></div>
+      <!-- Messages Area (ARIA Live Region) -->
+      <div
+        class="messages"
+        id="messages"
+        role="log"
+        aria-live="polite"
+        aria-atomic="false"
+        aria-label="Conversation with Chunav Guru"
+        tabindex="0"
+      ></div>
 
       <!-- Input Area -->
-      <div class="input-zone">
-        <div class="options-row" id="optionsRow"></div>
+      <div class="input-zone" role="form" aria-label="Player input area">
+        <div class="options-row" id="optionsRow" role="group" aria-label="Answer choices"></div>
         <div class="text-row">
-          <input type="text" id="userInput" placeholder="Type your answer or command..." autocomplete="off" />
-          <button class="send-btn" id="sendBtn" onclick="game.send()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <label for="userInput" class="sr-only">Type your answer or command</label>
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Type your answer or command..."
+            autocomplete="off"
+            aria-label="Type your answer or command"
+            aria-describedby="inputHint"
+          />
+          <span id="inputHint" class="sr-only">Press Enter or click the send button to submit your answer.</span>
+          <button class="send-btn" id="sendBtn" onclick="game.send()" aria-label="Send your answer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
         </div>
       </div>
@@ -104,12 +146,15 @@
   </div>
 
   <!-- Certificate Overlay -->
-  <div class="cert-overlay" id="certOverlay">
+  <div class="cert-overlay" id="certOverlay" role="dialog" aria-modal="true" aria-labelledby="certHeading" aria-hidden="true">
     <div class="cert-box" id="certBox"></div>
   </div>
 
   <!-- Confetti Canvas -->
-  <canvas id="confettiCanvas"></canvas>
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- Status announcer for screen readers -->
+  <div id="srAnnouncer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
 
   <script src="game.js"></script>
 </body>
