@@ -659,3 +659,4 @@ window.onload = () => {
   window.game = new BePMGame();
   window.game.init();
 };
+
