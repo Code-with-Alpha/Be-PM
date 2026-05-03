@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be PM: Road to Prime Minister 🇮🇳</title>
+  <meta name="description" content="Learn Indian election civics through a fun adventure game. Go from Common Citizen to Prime Minister with Chunav Guru as your guide!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background -->
+  <div class="bg-gradient"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- App Shell -->
+  <div class="app" id="app">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="flag-strip">
+          <span class="flag-saffron"></span>
+          <span class="flag-white"><div class="mini-chakra"></div></span>
+          <span class="flag-green"></span>
+        </div>
+        <div class="game-logo">🏛️ BE PM</div>
+      </div>
+
+      <div class="player-card">
+        <div class="avatar-wrap">
+          <div class="avatar-glow"></div>
+          <div class="avatar" id="avatarIcon">🧑</div>
+        </div>
+        <div class="player-name" id="sidebarName">Citizen</div>
+        <div class="rank-badge" id="sidebarRank">
+          <span id="rankIcon">🌱</span>
+          <span id="rankLabel">Common Citizen</span>
+        </div>
+      </div>
+
+      <div class="xp-block">
+        <div class="xp-header">
+          <span>XP Progress</span>
+          <span id="xpCount">0 / 1000</span>
+        </div>
+        <div class="xp-track">
+          <div class="xp-fill" id="xpFill"></div>
+        </div>
+        <div class="xp-sublabel" id="xpSublabel">Keep going!</div>
+      </div>
+
+      <div class="level-journey">
+        <div class="journey-title">Your Journey</div>
+        <div class="level-dots" id="levelDots"></div>
+      </div>
+
+      <div class="quick-cmds">
+        <div class="cmds-title">Quick Commands</div>
+        <button class="qbtn" onclick="game.cmd('hint')">💡 Hint</button>
+        <button class="qbtn" onclick="game.cmd('fun fact')">🎯 Fun Fact</button>
+        <button class="qbtn" onclick="game.cmd('explain more')">📚 Explain More</button>
+        <button class="qbtn" onclick="game.cmd('my rank')">🏅 My Rank</button>
+        <button class="qbtn danger" onclick="game.cmd('restart')">🔄 Restart</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT AREA -->
+    <main class="chat-wrap">
+
+      <!-- Header -->
+      <header class="chat-header">
+        <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+        <div class="header-guru">
+          <div class="guru-orb">CG</div>
+          <div>
+            <div class="header-title">🇮🇳 BE PM: Road to Prime Minister</div>
+            <div class="header-sub" id="headerSub">Chunav Guru is ready to guide you</div>
+          </div>
+        </div>
+        <div class="header-xp-mini">
+          <span id="headerXP">0 XP</span>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <div class="messages" id="messages"></div>
+
+      <!-- Input Area -->
+      <div class="input-zone">
+        <div class="options-row" id="optionsRow"></div>
+        <div class="text-row">
+          <input type="text" id="userInput" placeholder="Type your answer or command..." autocomplete="off" />
+          <button class="send-btn" id="sendBtn" onclick="game.send()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Certificate Overlay -->
+  <div class="cert-overlay" id="certOverlay">
+    <div class="cert-box" id="certBox"></div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="game.js"></script>
+</body>
+</html>
