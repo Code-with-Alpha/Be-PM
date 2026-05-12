@@ -3,7 +3,7 @@
 
 Welcome to **Chunav-Sathi**, an interactive, educational adventure game designed to teach the fundamentals of Indian election civics. Players embark on a journey starting as a "Common Citizen" and navigate through 8 engaging levels of India's electoral process to ultimately become the Prime Minister.
 
----
+initially deployment 
 
 ## 📌 1. Chosen Vertical
 **EdTech / Civic Technology / Tech for Social Good**  
